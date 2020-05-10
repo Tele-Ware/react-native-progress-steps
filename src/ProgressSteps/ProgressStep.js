@@ -88,18 +88,12 @@ class ProgressStep extends Component {
 
   render() {
     const scrollViewProps = this.props.scrollViewProps || {};
-    const buttonRow = this.props.removeBtnRow ? null : (
-      <ProgressButtons 
-        renderNextButton={this.renderNextButton} 
-        renderPreviousButton={this.renderPreviousButton} 
-      />
-    );
 
     return (
       <View style={{ flex: 1 }}>
         <ScrollView {...scrollViewProps}>{this.props.children}</ScrollView>
 
-        {buttonRow}
+        {/* <ProgressButtons renderNextButton={this.renderNextButton} renderPreviousButton={this.renderPreviousButton} /> */}
       </View>
     );
   }
@@ -122,8 +116,7 @@ ProgressStep.propTypes = {
   previousBtnTextStyle: PropTypes.object,
   previousBtnDisabled: PropTypes.bool,
   scrollViewProps: PropTypes.object,
-  errors: PropTypes.bool,
-  removeBtnRow: PropTypes.bool
+  errors: PropTypes.bool
 };
 
 ProgressStep.defaultProps = {
@@ -132,8 +125,7 @@ ProgressStep.defaultProps = {
   finishBtnText: 'Submit',
   nextBtnDisabled: false,
   previousBtnDisabled: false,
-  errors: false,
-  removeBtnRow: false
+  errors: false
 };
 
 export default ProgressStep;

@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { times } from 'lodash';
-import PropTypes from 'prop-types';
+
 import StepIcon from './StepIcon';
 
 class ProgressSteps extends Component {
   state = {
+    showStepper:true,
     stepCount: 0,
-    activeStep: this.props.activeStep,
+    activeStep: this.props.activeStep || 0
   };
 
   componentDidMount() {
     this.setState({ stepCount: React.Children.count(this.props.children) });
   }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.activeStep !== this.props.activeStep) {
-      this.setActiveStep(this.props.activeStep);
-    }
+  componentWillReceiveProps(next){
+    this.setState({showStepper:next.showStepper})
   }
 
   getChildProps() {
@@ -26,12 +24,8 @@ class ProgressSteps extends Component {
 
   renderStepIcons = () => {
     let step = [];
-
-    times(this.state.stepCount, (i) => {
-      const isCompletedStep = this.props.isComplete ? true : i < this.state.activeStep;
-
-      const isActiveStep = this.props.isComplete ? false : i === this.state.activeStep;
-
+   
+    times(this.state.stepCount, i => {
       step.push(
         <View key={i}>
           <View>
@@ -41,8 +35,8 @@ class ProgressSteps extends Component {
               label={this.props.children[i].props.label}
               isFirstStep={i === 0}
               isLastStep={i === this.state.stepCount - 1}
-              isCompletedStep={isCompletedStep}
-              isActiveStep={isActiveStep}
+              isCompletedStep={i < this.state.activeStep}
+              isActiveStep={i === this.state.activeStep}
             />
           </View>
         </View>
@@ -53,13 +47,8 @@ class ProgressSteps extends Component {
   };
 
   // Callback function from ProgressStep that passes current step.
-  setActiveStep = (step) => {
-    // Guard against setting current step higher than total step count.
-    if (step >= this.state.stepCount - 1) {
-      this.setState({ activeStep: this.state.stepCount - 1 });
-    }
-
-    if (step > -1 && step < this.state.stepCount - 1) {
+  setActiveStep = step => {
+    if (step > -1) {
       this.setState({ activeStep: step });
     }
   };
@@ -72,33 +61,26 @@ class ProgressSteps extends Component {
         alignSelf: 'center',
         flexDirection: 'row',
         top: 30,
-        marginBottom: 50,
-      },
+        marginBottom: 50
+      }
     };
+
+    const {showStepper } = this.state
+
 
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.stepIcons}>{this.renderStepIcons()}</View>
+       {showStepper && <View style={styles.stepIcons}>{this.renderStepIcons()}</View>}
         <View style={{ flex: 1 }}>
           {React.cloneElement(this.props.children[this.state.activeStep], {
             setActiveStep: this.setActiveStep,
             activeStep: this.state.activeStep,
-            stepCount: this.state.stepCount,
+            stepCount: this.state.stepCount
           })}
         </View>
       </View>
     );
   }
 }
-
-ProgressSteps.propTypes = {
-  isComplete: PropTypes.bool,
-  activeStep: PropTypes.number,
-};
-
-ProgressSteps.defaultProps = {
-  isComplete: false,
-  activeStep: 0,
-};
 
 export default ProgressSteps;
