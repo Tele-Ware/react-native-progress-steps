@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Colors, View, Text, TouchableOpacity } from '../../../../src/UI'
 import PropTypes from 'prop-types';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 class StepIcon extends Component {
   render() {
@@ -146,20 +147,23 @@ class StepIcon extends Component {
     }
 
     return (
-      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-        <View style={styles.circleStyle}>
-          <Text style={styles.circleText}>
-            {this.props.isCompletedStep ? (
-              <Text style={{ color: this.props.completedCheckColor }}>&#10003;</Text>
-            ) : (
-              <Text style={styles.stepNum}>{this.props.stepNum}</Text>
-            )}
-          </Text>
-        </View>
-        <Text style={styles.labelText}>{this.props.label}</Text>
-        {!this.props.isFirstStep && <View style={styles.leftBar} />}
-        {!this.props.isLastStep && <View style={styles.rightBar} />}
+      <View style={{ marginRight: RFValue(10), width: RFValue(25), height: RFValue(25), borderRadius: RFValue(25 / 2), backgroundColor: this.props.isCompletedStep ? Colors().App.Primary : Colors().App.White, borderWidth: 1, borderColor: Colors().App.Primary }}>
+
       </View>
+      // <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+      //   <View style={styles.circleStyle}>
+      //     <Text style={styles.circleText}>
+      //       {this.props.isCompletedStep ? (
+      //         <Text style={{ color: this.props.completedCheckColor }}>&#10003;</Text>
+      //       ) : (
+      //         <Text style={styles.stepNum}>{this.props.stepNum}</Text>
+      //       )}
+      //     </Text>
+      //   </View>
+      //   <Text style={styles.labelText}>{this.props.label}</Text>
+      //   {!this.props.isFirstStep && <View style={styles.leftBar} />}
+      //   {!this.props.isLastStep && <View style={styles.rightBar} />}
+      // </View>
     );
   }
 }
