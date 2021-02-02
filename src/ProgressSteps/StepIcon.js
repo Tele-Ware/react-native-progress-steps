@@ -20,7 +20,7 @@ class StepIcon extends Component {
         },
         circleText: {
           alignSelf: 'center',
-          top: 20 / 3
+          // top: 20 / 3
         },
         labelText: {
           textAlign: 'center',
@@ -51,7 +51,8 @@ class StepIcon extends Component {
           marginLeft: 40 / 2 + 2
         },
         stepNum: {
-          color: this.props.activeStepNumColor
+          color: this.props.activeStepNumColor,
+          fontWeight: 'bold'
         }
       };
     } else if (this.props.isCompletedStep) {
@@ -60,11 +61,12 @@ class StepIcon extends Component {
           width: 36,
           height: 36,
           borderRadius: 18,
-          backgroundColor: this.props.completedStepIconColor
+          backgroundColor: this.props.completedStepIconColor,
+
         },
         circleText: {
           alignSelf: 'center',
-          top: 18 / 2
+          // top: 18 / 2
         },
         labelText: {
           textAlign: 'center',
@@ -93,10 +95,12 @@ class StepIcon extends Component {
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.completedProgressBarColor,
-          marginLeft: 36 / 2 + 4
+          marginLeft: 36 / 2 + 4,
+
         },
         stepNum: {
-          color: this.props.completedStepNumColor
+          color: this.props.completedStepNumColor,
+          fontWeight: 'bold'
         }
       };
     } else {
@@ -109,7 +113,7 @@ class StepIcon extends Component {
         },
         circleText: {
           alignSelf: 'center',
-          top: 18 / 2
+          // top: 18 / 2
         },
         labelText: {
           textAlign: 'center',
@@ -141,23 +145,38 @@ class StepIcon extends Component {
           marginLeft: 36 / 2 + 4
         },
         stepNum: {
-          color: this.props.disabledStepNumColor
+          color: this.props.disabledStepNumColor,
+          fontWeight: 'bold'
         }
       };
     }
 
     return (
-      <View style={{ marginRight: RFValue(10), width: RFValue(25), height: RFValue(25), borderRadius: RFValue(25 / 2), backgroundColor: this.props.isCompletedStep ? Colors().App.Primary : Colors().App.White, borderWidth: 1, borderColor: Colors().App.Primary }}>
-
+      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+        <View style={[styles.circleStyle, { justifyContent: 'center' }]}>
+          <Text style={styles.circleText}>
+            {this.props.isCompletedStep ? (
+              <Text style={{ color: this.props.completedCheckColor }}>&#10003;</Text>
+            ) : (
+                <Text style={styles.stepNum}>{this.props.stepNum}</Text>
+              )}
+          </Text>
+        </View>
+        <Text style={styles.labelText}>{this.props.label}</Text>
+        {!this.props.isFirstStep && <View style={styles.leftBar} />}
+        {!this.props.isLastStep && <View style={styles.rightBar} />}
       </View>
+      // <View style={{ justifyContent: 'center', alignItems: 'center', marginRight: RFValue(10), width: RFValue(40), height: RFValue(40), borderRadius: RFValue(40 / 2), backgroundColor: this.props.isCompletedStep ? Colors().App.Primary : this.props.isActiveStep ? Colors().App.White : Colors().App.lightGrey, borderWidth: 1, borderColor: Colors().App.Primary }}>
+      //   <Text style={[styles.stepNum, { fontSize: RFValue(15), fontWeight: 'bold' }]}>{this.props.stepNum}</Text>
+      // </View>
       // <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       //   <View style={styles.circleStyle}>
       //     <Text style={styles.circleText}>
       //       {this.props.isCompletedStep ? (
       //         <Text style={{ color: this.props.completedCheckColor }}>&#10003;</Text>
       //       ) : (
-      //         <Text style={styles.stepNum}>{this.props.stepNum}</Text>
-      //       )}
+      //           <Text style={styles.stepNum}>{this.props.stepNum}</Text>
+      //         )}
       //     </Text>
       //   </View>
       //   <Text style={styles.labelText}>{this.props.label}</Text>
