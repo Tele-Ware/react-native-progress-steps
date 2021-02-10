@@ -6,6 +6,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 class StepIcon extends Component {
   render() {
     let styles;
+    const isRtl = this.props.isRtl
 
     if (this.props.isActiveStep) {
       styles = {
@@ -33,8 +34,8 @@ class StepIcon extends Component {
         leftBar: {
           position: 'absolute',
           top: 40 / 2.22,
-          left: 0,
-          right: 40 + 8,
+          left: isRtl ? 40 + 8 : 0,
+          right: isRtl ? 0 : 40 + 8,
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.completedProgressBarColor,
@@ -43,8 +44,8 @@ class StepIcon extends Component {
         rightBar: {
           position: 'absolute',
           top: 40 / 2.22,
-          right: 0,
-          left: 40 + 8,
+          right: isRtl ? 40 + 8 : 0,
+          left: isRtl ? 0 : 40 + 8,
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.progressBarColor,
@@ -80,8 +81,8 @@ class StepIcon extends Component {
         leftBar: {
           position: 'absolute',
           top: 36 / 2,
-          left: 0,
-          right: 36 + 8,
+          left: isRtl ? 36 + 8 : 0,
+          right: isRtl ? 0 : 36 + 8,
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.completedProgressBarColor,
@@ -90,8 +91,8 @@ class StepIcon extends Component {
         rightBar: {
           position: 'absolute',
           top: 36 / 2,
-          right: 0,
-          left: 36 + 8,
+          right: isRtl ? 36 + 8 : 0,
+          left: isRtl ? 0 : 36 + 8,
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.completedProgressBarColor,
@@ -127,8 +128,8 @@ class StepIcon extends Component {
         leftBar: {
           position: 'absolute',
           top: 36 / 2,
-          left: 0,
-          right: 36 + 8,
+          left: isRtl ? 36 + 8 : 0,
+          right: isRtl ? 0 : 36 + 8,
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.progressBarColor,
@@ -137,8 +138,8 @@ class StepIcon extends Component {
         rightBar: {
           position: 'absolute',
           top: 36 / 2,
-          right: 0,
-          left: 36 + 8,
+          right: isRtl ? 36 + 8 : 0,
+          left: isRtl ? 0 : 36 + 8,
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.progressBarColor,
