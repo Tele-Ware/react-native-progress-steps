@@ -6,7 +6,7 @@ import StepIcon from './StepIcon';
 
 class ProgressSteps extends Component {
   state = {
-    showStepper:true,
+    showStepper: true,
     stepCount: 0,
     activeStep: this.props.activeStep || 0
   };
@@ -14,8 +14,8 @@ class ProgressSteps extends Component {
   componentDidMount() {
     this.setState({ stepCount: React.Children.count(this.props.children) });
   }
-  componentWillReceiveProps(next){
-    this.setState({showStepper:next.showStepper})
+  componentWillReceiveProps(next) {
+    this.setState({ showStepper: next.showStepper })
   }
 
   getChildProps() {
@@ -24,7 +24,7 @@ class ProgressSteps extends Component {
 
   renderStepIcons = () => {
     let step = [];
-   
+
     times(this.state.stepCount, i => {
       step.push(
         <View key={i}>
@@ -37,6 +37,7 @@ class ProgressSteps extends Component {
               isLastStep={i === this.state.stepCount - 1}
               isCompletedStep={i < this.state.activeStep}
               isActiveStep={i === this.state.activeStep}
+              isRtl={this.props.isRtl}
             />
           </View>
         </View>
@@ -59,18 +60,23 @@ class ProgressSteps extends Component {
         position: 'relative',
         justifyContent: 'space-evenly',
         alignSelf: 'center',
-        flexDirection: 'row',
+        // flexDirection: 'row',
         top: 30,
-        marginBottom: 50
+        marginBottom: 50,
+        paddingTop: 20,
+        width: '100%',
+        borderTopWidth: 1,
+        borderTopColor: 'white',
+        flexDirection: this.props.isRtl ? 'row-reverse' : 'row'
       }
     };
 
-    const {showStepper } = this.state
+    const { showStepper } = this.state
 
-
+    // transform: [I18nManager.isRTL ? { rotate: '180deg' } : { rotate: '0deg' }]
     return (
       <View style={{ flex: 1 }}>
-       {showStepper && <View style={styles.stepIcons}>{this.renderStepIcons()}</View>}
+        {showStepper && <View style={styles.stepIcons}>{this.renderStepIcons()}</View>}
         <View style={{ flex: 1 }}>
           {React.cloneElement(this.props.children[this.state.activeStep], {
             setActiveStep: this.setActiveStep,
