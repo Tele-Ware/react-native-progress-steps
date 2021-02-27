@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Colors, View, Text, TouchableOpacity } from '../../../../src/UI'
+import { Colors, View, Text, TouchableOpacity, RFValue } from '../../../../src/UI'
 import PropTypes from 'prop-types';
-import { RFValue } from 'react-native-responsive-fontsize';
 
 class StepIcon extends Component {
   render() {
@@ -157,9 +156,9 @@ class StepIcon extends Component {
         <View style={[styles.circleStyle, { justifyContent: 'center' }]}>
           <Text style={styles.circleText}>
             {this.props.isCompletedStep ? (
-              <Text style={{ color: this.props.completedCheckColor }}>&#10003;</Text>
+              <Text style={{ color: this.props.completedCheckColor, fontFamily: 'Poppins-SemiBold', fontSize: RFValue(18) }}>&#10003;</Text>
             ) : (
-                <Text style={styles.stepNum}>{this.props.stepNum}</Text>
+                <Text style={[styles.stepNum, { fontFamily: 'Poppins-SemiBold', fontSize: RFValue(18) }]}>{this.props.stepNum}</Text>
               )}
           </Text>
         </View>
